@@ -1,0 +1,25 @@
+{
+  "name": "esm",
+  "version": "1.0.0",
+  "description": "",
+  "types": "./src",
+  "scripts": {
+    "test": "jest",
+    "build-t": "npx tsc --module commonjs --outDir cjs/ && echo '{\"type\": \"commonjs\"}' > cjs/package.json && npx tsc --module es2022 --outDir esm/ && echo '{\"type\": \"module\"}' > esm/package.json",
+    "build": "npx esbuild --bundle src/index.ts --outdir=cjs --platform=node --format=cjs && echo '{\"type\": \"commonjs\"}' > cjs/package.json && npx esbuild --bundle src/index.ts --outdir=esm --platform=neutral --format=esm && echo '{\"type\": \"module\"}' > esm/package.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "exports": {
+    "require": "./cjs/index.js",
+    "import": "./esm/index.js"
+  },
+  "main": "./cjs/index.js",
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "esbuild-jest": "^0.5.0",
+    "jest": "^29.5.0",
+    "esbuild": "^0.17.13"
+  }
+}
